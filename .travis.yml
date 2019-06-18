@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+    - 10
+cache: yarn
+install:
+    - yarn
+script:
+    - yarn build
+after_success:
+    - cd docs/.vuepress/dist
+    - git init
+    - git config --global user.name "fw6"
+    - git config --global user.email "lyman.von9506@gmail.com"
+    - git add -A
+    - git commit -m 'deploy'
+    - git push --quiet --force git@github.com:fw6/docs.git master:${P_BRANCH}
